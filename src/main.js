@@ -4,6 +4,7 @@ import router from "./router";
 import store from "./store";
 import Antd from "ant-design-vue";
 import "ant-design-vue/dist/antd.less";
+import "./global.less"; // global style
 
 Vue.config.productionTip = false;
 
