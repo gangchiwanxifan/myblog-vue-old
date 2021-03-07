@@ -1,5 +1,5 @@
 <template>
-  <div>Myblog Ant Design ©2021 Created by gcwxf</div>
+  <div>安全设置</div>
 </template>
 
 <script>

@@ -5,10 +5,12 @@ import store from "./store";
 import Antd from "ant-design-vue";
 import "ant-design-vue/dist/antd.less";
 import "./global.less"; // global style
+import VueCropper from "vue-cropper"; // 图片裁剪
 
 Vue.config.productionTip = false;
 
 Vue.use(Antd);
+Vue.use(VueCropper);
 
 new Vue({
   router,

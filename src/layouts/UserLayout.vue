@@ -5,7 +5,7 @@
         <div class="top">
           <div class="header">
             <a href="/">
-              <img src="~@/assets/logo.svg" class="logo" alt="logo" />
+              <img src="~@/assets/spring.svg" class="logo" alt="logo" />
               <span class="title">Simple Blog</span>
             </a>
           </div>
@@ -83,7 +83,7 @@ export default {
           }
 
           .logo {
-            height: 44px;
+            height: 48px;
             vertical-align: top;
             margin-right: 16px;
             border-style: none;

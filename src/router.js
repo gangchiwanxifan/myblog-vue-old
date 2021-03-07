@@ -52,6 +52,72 @@ const routes = [
         component: () => import(/* webpackChunkName: "user" */ "./views/About")
       }
     ]
+  },
+  {
+    path: "/account",
+    component: () =>
+      import(/* webpackChunkName: "layout" */ "./layouts/BasicLayout"),
+    children: [
+      {
+        path: "/account/center",
+        name: "center",
+        component: () =>
+          import(/* webpackChunkName: "user" */ "./views/account/center")
+      },
+      {
+        path: "/account/settings",
+        name: "settings",
+        component: () =>
+          import(/* webpackChunkName: "user" */ "./views/account/settings"),
+        children: [
+          {
+            path: "/account/settings",
+            redirect: "/account/settings/basic"
+          },
+          {
+            path: "/account/settings/basic",
+            name: "BasicSettings",
+            meta: { title: "基本设置" },
+            component: () =>
+              import(
+                /* webpackChunkName: "user" */ "./views/account/settings/BasicSettings"
+              )
+          },
+          {
+            path: "/account/settings/security",
+            name: "SecuritySettings",
+            meta: { title: "安全设置" },
+            component: () =>
+              import(
+                /* webpackChunkName: "user" */ "./views/account/settings/Security"
+              )
+          },
+          {
+            path: "/account/settings/wallet",
+            name: "MyWallet",
+            meta: { title: "我的钱包" },
+            component: () =>
+              import(
+                /* webpackChunkName: "user" */ "./views/account/settings/MyWallet"
+              )
+          },
+          {
+            path: "/account/settings/notification",
+            name: "NotificationSettings",
+            meta: { title: "消息通知" },
+            component: () =>
+              import(
+                /* webpackChunkName: "user" */ "./views/account/settings/Notification"
+              )
+          }
+        ]
+      }
+    ]
+  },
+  {
+    path: "*",
+    component: () =>
+      import(/* webpackChunkName: "exception" */ "./views/exception/404")
   }
 ];
 
