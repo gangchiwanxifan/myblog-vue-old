@@ -73,13 +73,44 @@
 </template>
 
 <script>
+import request from "@/utils/request";
+
 export default {
   data() {
     this.form = this.$form.createForm(this);
     return {};
   },
   methods: {
-    handleSubmit() {}
+    handleSubmit() {
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          let user = {
+            username: values.username,
+            password: values.password
+          };
+          console.log(user);
+          request({
+            url: "/user/login",
+            method: "post",
+            data: user
+          }).then(res => {
+            let id = res.data.data;
+            if (id) {
+              this.$store.dispatch("fetchUserInfo", id);
+              this.$message.loading("登录中，请稍等...", 2.5);
+              setTimeout(() => {
+                this.$router.push("/");
+              }, 2500);
+            } else {
+              this.$message.error("用户名或密码错误！");
+            }
+          });
+          // console.log(user);
+        }
+      });
+      // this.$store.commit("SET_LOGIN_STATUS", true);
+      // this.$router.push({ path: "/" });
+    }
   }
 };
 </script>

@@ -24,10 +24,10 @@
                 <a-icon type="table" style="font-size:17px" />
                 <span style="font-size:17px">栏目</span>
               </a-menu-item>
-              <a-menu-item key="3">
+              <!-- <a-menu-item key="3">
                 <a-icon type="team" style="font-size:17px" />
                 <span style="font-size:17px">关注</span>
-              </a-menu-item>
+              </a-menu-item> -->
             </a-menu>
           </div>
           <div class="ant-global-header-index-right">
@@ -37,9 +37,10 @@
       </div>
     </a-layout-header>
     <a-layout-content class="basicLayout-content">
-      <div style="max-width: 1200px; margin: 0 auto">
+      <!-- <div style="max-width: 1200px; margin: 0 auto">
         <router-view />
-      </div>
+      </div> -->
+      <router-view></router-view>
     </a-layout-content>
     <a-layout-footer style="text-align: center">
       <Footer />

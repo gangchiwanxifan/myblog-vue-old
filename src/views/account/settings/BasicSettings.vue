@@ -2,12 +2,29 @@
   <div class="account-settings-info-view">
     <a-row :gutter="16">
       <a-col :md="24" :lg="16">
-        <a-form layout="vertical">
+        <a-form layout="vertical" :form="form">
           <a-form-item label="昵称">
-            <a-input placeholder="请输入您的昵称!" />
+            <a-input
+              placeholder="请输入您的昵称!"
+              v-decorator="[
+                'accountName',
+                {
+                  initialValue: userInfo.accountName,
+                  rules: [{ required: true, message: '昵称不许为空！' }],
+                  validateTrigger: ['change', 'blur']
+                }
+              ]"
+            />
           </a-form-item>
           <a-form-item label="性别">
-            <a-radio-group>
+            <a-radio-group
+              v-decorator="[
+                'sex',
+                {
+                  initialValue: userInfo.sex ? userInfo.sex : 3
+                }
+              ]"
+            >
               <a-radio :value="1">
                 男
               </a-radio>
@@ -20,7 +37,16 @@
             </a-radio-group>
           </a-form-item>
           <a-form-item label="个人简介">
-            <a-textarea rows="4" placeholder="请输入个人简介!" />
+            <a-textarea
+              rows="4"
+              placeholder="请输入个人简介!"
+              v-decorator="[
+                'introduction',
+                {
+                  initialValue: userInfo.introduction
+                }
+              ]"
+            />
           </a-form-item>
           <a-form-item>
             <a-button type="primary">更新基本信息</a-button>
@@ -51,9 +77,11 @@ export default {
     AvatarModal
   },
   data() {
+    this.form = this.$form.createForm(this);
     return {
       // cropper
       preview: {},
+      userInfo: {},
       option: {
         img: "/avatar2.jpg",
         info: true,
@@ -70,6 +98,10 @@ export default {
         fixedNumber: [1, 1]
       }
     };
+  },
+  mounted() {
+    this.userInfo = this.$store.state.user.userInfo;
+    console.log(this.userInfo);
   },
   methods: {
     setavatar(url) {

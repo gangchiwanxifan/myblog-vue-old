@@ -9,5 +9,20 @@ module.exports = {
         javascriptEnabled: true
       }
     }
+  },
+  devServer: {
+    proxy: "http://127.0.0.1:9100"
+    // proxy: {
+    //   "/api": {
+    //     target: "http://127.0.0.1:9100",
+    //     pathRewrite: {
+    //       "^/api": "/"
+    //     },
+    //     // changeOrigin: true
+    //   }
+    //   // '/foo': {
+    //   //   target: '<other_url>'
+    //   // }
+    // }
   }
 };
