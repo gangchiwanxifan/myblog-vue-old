@@ -9,7 +9,7 @@
               type="text"
               placeholder="账号"
               v-decorator="[
-                'accountname',
+                'accountName',
                 {
                   rules: [{ required: true, message: '请输入账号' }],
                   validateTrigger: ['change', 'blur']
@@ -105,6 +105,7 @@
 
 <script>
 import { scorePassword } from "@/utils/util";
+import request from "@/utils/request";
 
 const levelNames = {
   0: "强度：太短",
@@ -130,12 +131,9 @@ export default {
   data() {
     this.form = this.$form.createForm(this);
     return {
-      // form: this.$form.createForm(this),
-
       state: {
         time: 60,
         level: 0,
-        smsSendBtn: false,
         passwordLevel: 0,
         passwordLevelChecked: false,
         percent: 0,
@@ -159,7 +157,6 @@ export default {
       if (value === "") {
         return callback();
       }
-      // console.log("scorePassword ; ", scorePassword(value));
       if (value.length >= 6) {
         if (scorePassword(value) >= 30) {
           this.state.level = 1;
@@ -181,7 +178,6 @@ export default {
 
     handlePasswordCheck(rule, value, callback) {
       const password = this.form.getFieldValue("password");
-      // console.log('value', value)
       if (value === undefined) {
         callback(new Error(this.$t("user.password.required")));
       }
@@ -194,14 +190,28 @@ export default {
     handleSubmit() {
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log(1);
-          console.log(values);
-          // this.fieldA = values.fieldA;
-          // Object.assign(this, values);
-          this.$router.push({ name: "registerResult", params: { ...values } });
+          let user = {
+            username: values.username,
+            accountName: values.accountName,
+            password: values.password
+          };
+          request({
+            url: "/user/registered",
+            method: "post",
+            data: user
+          }).then(res => {
+            let id = res.data.data;
+            if (id) {
+              this.$router.push({
+                name: "registerResult",
+                params: { ...values }
+              });
+            } else {
+              this.$message.error("注册失败,该账号已存在");
+            }
+          });
         }
       });
-      // this.$router.push({ path: "result" });
     }
   }
 };

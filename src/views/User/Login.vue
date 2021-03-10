@@ -88,7 +88,6 @@ export default {
             username: values.username,
             password: values.password
           };
-          console.log(user);
           request({
             url: "/user/login",
             method: "post",
@@ -105,11 +104,8 @@ export default {
               this.$message.error("用户名或密码错误！");
             }
           });
-          // console.log(user);
         }
       });
-      // this.$store.commit("SET_LOGIN_STATUS", true);
-      // this.$router.push({ path: "/" });
     }
   }
 };

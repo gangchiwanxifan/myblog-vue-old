@@ -1,8 +1,16 @@
 <template>
   <div id="main">
     <a-card>
+      <a-button
+        class="draft-btn"
+        type="dashed"
+        size="large"
+        @click="handleToDraft"
+      >
+        <a-icon type="delete" />草稿箱
+      </a-button>
       <a-form>
-        <a-form-item>
+        <a-form-item style="width: 60%">
           <a-input
             class="blog-title"
             placeholder="请输入标题 (建议30字以内)"
@@ -16,7 +24,7 @@
         />
         <a-divider />
         <a-form-item label="请选择栏目分类">
-          <a-radio-group default-value="1" button-style="solid" size="large">
+          <a-radio-group defaultValue="1" button-style="solid" size="large">
             <a-radio-button
               v-for="item in channels"
               :value="item.id"
@@ -70,27 +78,27 @@
 <script>
 const channels = [
   {
-    id: 1,
+    id: "1",
     channelName: "动画"
   },
   {
-    id: 2,
+    id: "2",
     channelName: "游戏"
   },
   {
-    id: 3,
+    id: "3",
     channelName: "影视"
   },
   {
-    id: 4,
+    id: "4",
     channelName: "生活"
   },
   {
-    id: 5,
+    id: "5",
     channelName: "兴趣"
   },
   {
-    id: 6,
+    id: "6",
     channelName: "科技"
   }
 ];
@@ -102,6 +110,9 @@ export default {
     };
   },
   methods: {
+    handleToDraft() {
+      this.$router.push({ path: "/blog/draft" });
+    },
     show() {
       console.log(this.value);
     }
@@ -112,7 +123,8 @@ export default {
 <style scoped>
 .blog-title {
   height: 64px;
-  width: 658px;
+  width: 60%;
+  margin: auto;
   font-size: 40px;
   border: none;
 }
@@ -122,5 +134,9 @@ export default {
 }
 .blog-editor {
   z-index: 1000 !important;
+}
+.draft-btn {
+  float: right;
+  margin-top: 10px;
 }
 </style>

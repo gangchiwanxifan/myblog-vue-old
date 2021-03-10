@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="1">
+    <div v-if="loginStatus">
       <a-button class="edit-button" shape="round" @click="handleToEdit"
         ><a-icon type="highlight" />写文章</a-button
       >
@@ -16,7 +16,7 @@
           <a-menu class="ant-pro-drop-down menu" :selected-keys="[]">
             <a-menu-item class="menu-username"
               ><a-icon type="smile" style="font-size: 15px" />{{
-                username
+                accountName
               }}</a-menu-item
             >
             <a-menu-divider v-if="menu" />
@@ -63,7 +63,7 @@ export default {
   name: "AvatarDropdown",
   data() {
     return {
-      username: "",
+      accountName: "",
       avatar: ""
     };
   },
@@ -79,7 +79,7 @@ export default {
   },
   mounted() {
     if (this.loginStatus) {
-      this.username = this.userInfo.username;
+      this.accountName = this.userInfo.accountName;
       this.avatar = this.userInfo.avatar
         ? this.userInfo.avatar
         : "https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png";
@@ -95,7 +95,7 @@ export default {
   },
   methods: {
     handleToEdit() {
-      this.$router.push({ path: "/blog" });
+      this.$router.push({ path: "/blog/edit" });
     },
     handleToCenter() {
       this.$router.push({ path: "/account/center" });
@@ -133,8 +133,8 @@ export default {
   }
 }
 .menu-username {
-  font-size: 17px;
-  font-weight: 550;
+  font-size: 16px;
+  font-weight: 500;
   color: rgba(0, 0, 0, 0.65);
 }
 .edit-button {

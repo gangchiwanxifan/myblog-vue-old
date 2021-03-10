@@ -39,7 +39,7 @@
           <a-form-item label="个人简介">
             <a-textarea
               rows="4"
-              placeholder="请输入个人简介!"
+              placeholder="请输入个人简介..."
               v-decorator="[
                 'introduction',
                 {
@@ -49,7 +49,9 @@
             />
           </a-form-item>
           <a-form-item>
-            <a-button type="primary">更新基本信息</a-button>
+            <a-button type="primary" @click="handleSubmit"
+              >更新基本信息</a-button
+            >
           </a-form-item>
         </a-form>
       </a-col>
@@ -71,6 +73,7 @@
 
 <script>
 import AvatarModal from "./AvatarModal";
+import request from "@/utils/request";
 
 export default {
   components: {
@@ -83,7 +86,7 @@ export default {
       preview: {},
       userInfo: {},
       option: {
-        img: "/avatar2.jpg",
+        img: "",
         info: true,
         size: 1,
         outputType: "jpeg",
@@ -101,11 +104,44 @@ export default {
   },
   mounted() {
     this.userInfo = this.$store.state.user.userInfo;
-    console.log(this.userInfo);
+    this.option.img = this.$store.state.user.userInfo.avatar;
   },
   methods: {
     setavatar(url) {
+      let user = {
+        id: this.userInfo.id,
+        avatar: url
+      };
+      console.log(user);
+      request({
+        url: "/user/update",
+        method: "post",
+        data: user
+      }).then(res => {
+        let user = res.data.data;
+        this.$store.dispatch("fetchUserInfo", user.id);
+        this.$message.success("上传成功");
+      });
       this.option.img = url;
+    },
+    handleSubmit() {
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          let user = {
+            id: this.userInfo.id,
+            ...values
+          };
+          request({
+            url: "/user/update",
+            method: "post",
+            data: user
+          }).then(res => {
+            let user = res.data.data;
+            this.$store.dispatch("fetchUserInfo", user.id);
+            this.$message.success("更新成功");
+          });
+        }
+      });
     }
   }
 };

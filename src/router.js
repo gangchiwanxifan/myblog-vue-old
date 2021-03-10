@@ -44,17 +44,24 @@ const routes = [
     children: [
       {
         path: "/",
-        redirect: "/dashboard"
+        redirect: "/default"
       },
       {
-        path: "/dashboard",
-        name: "dashboard",
+        path: "/default",
+        name: "default",
         component: () => import(/* webpackChunkName: "user" */ "./views/About")
       },
       {
-        path: "/blog",
-        name: "blog",
-        component: () => import(/* webpackChunkName: "user" */ "./views/blog")
+        path: "/blog/edit",
+        name: "edit",
+        component: () =>
+          import(/* webpackChunkName: "user" */ "./views/blog/Edit")
+      },
+      {
+        path: "blog/draft",
+        name: "draft",
+        component: () =>
+          import(/* webpackChunkName: "user" */ "./views/blog/Draft")
       }
     ]
   },
@@ -127,7 +134,7 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  mode: "history",
+  // mode: "history",
   base: process.env.BASE_URL,
   routes
 });

@@ -24,7 +24,6 @@ const user = {
         })
           .then(res => {
             const result = res.data.data;
-            console.log(result);
             commit("SET_LOGIN_STATUS", true);
             commit("SET_USER_INFO", result);
             resolve();

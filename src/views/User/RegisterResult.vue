@@ -25,7 +25,7 @@ export default {
   },
   created() {
     this.form = this.$route.params;
-    this.description = `---账号：${this.$route.params.accountname}  ---  密码${this.$route.params.password}---`;
+    this.description = `---账号：${this.$route.params.accountName}  ---  密码${this.$route.params.password}---`;
   },
   methods: {
     goHomeHandle() {
