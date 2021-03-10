@@ -62,7 +62,7 @@
           <div class="mask">
             <a-icon type="plus" />
           </div>
-          <img :src="option.img" />
+          <img :src="img" />
         </div>
       </a-col>
     </a-row>
@@ -83,28 +83,31 @@ export default {
     this.form = this.$form.createForm(this);
     return {
       // cropper
-      preview: {},
+      // preview: {},
       userInfo: {},
-      option: {
-        img: "",
-        info: true,
-        size: 1,
-        outputType: "jpeg",
-        canScale: false,
-        autoCrop: true,
-        // 只有自动截图开启 宽度高度才生效
-        autoCropWidth: 180,
-        autoCropHeight: 180,
-        fixedBox: true,
-        // 开启宽度和高度比例
-        fixed: true,
-        fixedNumber: [1, 1]
-      }
+      img: "/avatar2.jpg"
+      // option: {
+      //   img: "/avatar2.jpg",
+      //   info: true,
+      //   size: 1,
+      //   outputType: "jpeg",
+      //   canScale: false,
+      //   autoCrop: true,
+      //   // 只有自动截图开启 宽度高度才生效
+      //   autoCropWidth: 180,
+      //   autoCropHeight: 180,
+      //   fixedBox: true,
+      //   // 开启宽度和高度比例
+      //   fixed: true,
+      //   fixedNumber: [1, 1]
+      // }
     };
   },
   mounted() {
     this.userInfo = this.$store.state.user.userInfo;
-    this.option.img = this.$store.state.user.userInfo.avatar;
+    this.img = this.$store.state.user.userInfo.avatar
+      ? this.$store.state.user.userInfo.avatar
+      : "/avatar2.jpg";
   },
   methods: {
     setavatar(url) {
@@ -121,8 +124,8 @@ export default {
         let user = res.data.data;
         this.$store.dispatch("fetchUserInfo", user.id);
         this.$message.success("上传成功");
+        this.img = url;
       });
-      this.option.img = url;
     },
     handleSubmit() {
       this.form.validateFields((err, values) => {

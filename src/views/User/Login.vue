@@ -96,7 +96,7 @@ export default {
             let id = res.data.data;
             if (id) {
               this.$store.dispatch("fetchUserInfo", id);
-              this.$message.loading("登录中，请稍等...", 2.5);
+              this.$message.loading("登录中，请稍等...", 1.5);
               setTimeout(() => {
                 this.$router.push("/");
               }, 2500);

@@ -28,6 +28,10 @@
               <a-icon type="setting" />
               个人设置
             </a-menu-item>
+            <a-menu-item v-if="userInfo.role" key="key" @click="handleToAdmin">
+              <a-icon type="key" />
+              后台管理
+            </a-menu-item>
             <a-menu-divider v-if="menu" />
             <a-menu-item key="logout" @click="handleLogout">
               <a-icon type="logout" />
@@ -93,6 +97,12 @@ export default {
       return this.$store.state.user.userInfo;
     }
   },
+  watch: {
+    userInfo: function(val) {
+      this.accountName = val.accountName;
+      this.avatar = val.avatar;
+    }
+  },
   methods: {
     handleToEdit() {
       this.$router.push({ path: "/blog/edit" });
@@ -102,6 +112,9 @@ export default {
     },
     handleToSettings() {
       this.$router.push({ path: "/account/settings" });
+    },
+    handleToAdmin() {
+      this.$router.push({ path: "/admin" });
     },
     handleLogout() {
       Modal.confirm({

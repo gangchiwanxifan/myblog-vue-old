@@ -127,6 +127,11 @@ const routes = [
     ]
   },
   {
+    path: "/admin",
+    component: () =>
+      import(/* webpackChunkName: "layout" */ "./layouts/AdminLayout")
+  },
+  {
     path: "*",
     component: () =>
       import(/* webpackChunkName: "exception" */ "./views/exception/404")
