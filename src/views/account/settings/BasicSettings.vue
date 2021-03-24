@@ -62,7 +62,7 @@
           <div class="mask">
             <a-icon type="plus" />
           </div>
-          <img :src="img" />
+          <img :src="img" onerror="this.src='/avatar.png'" />
         </div>
       </a-col>
     </a-row>
@@ -85,7 +85,7 @@ export default {
       // cropper
       // preview: {},
       userInfo: {},
-      img: "/avatar2.jpg"
+      img: "/avatar.jpg"
       // option: {
       //   img: "/avatar2.jpg",
       //   info: true,
@@ -107,7 +107,7 @@ export default {
     this.userInfo = this.$store.state.user.userInfo;
     this.img = this.$store.state.user.userInfo.avatar
       ? this.$store.state.user.userInfo.avatar
-      : "/avatar2.jpg";
+      : "/avatar.jpg";
   },
   methods: {
     setavatar(url) {

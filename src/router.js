@@ -49,7 +49,7 @@ const routes = [
       {
         path: "/default",
         name: "default",
-        component: () => import(/* webpackChunkName: "user" */ "./views/About")
+        component: () => import(/* webpackChunkName: "user" */ "./views/home")
       },
       {
         path: "/blog/edit",
@@ -129,7 +129,55 @@ const routes = [
   {
     path: "/admin",
     component: () =>
-      import(/* webpackChunkName: "layout" */ "./layouts/AdminLayout")
+      import(/* webpackChunkName: "layout" */ "./layouts/AdminLayout"),
+    children: [
+      {
+        path: "/admin",
+        redirect: "/admin/dashboard"
+      },
+      {
+        path: "/admin/dashboard",
+        name: "dashboard",
+        component: () =>
+          import(/* webpackChunkName: "layout" */ "./views/admin/dashboard")
+      },
+      {
+        path: "/admin/blog",
+        name: "blog-manage",
+        component: () =>
+          import(/* webpackChunkName: "layout" */ "./views/admin/blog")
+      },
+      {
+        path: "/admin/channel",
+        name: "channel-manage",
+        component: () =>
+          import(/* webpackChunkName: "layout" */ "./views/admin/channel")
+      },
+      {
+        path: "/admin/comment",
+        name: "comment-manage",
+        component: () =>
+          import(/* webpackChunkName: "layout" */ "./views/admin/comment")
+      },
+      {
+        path: "/admin/user",
+        name: "user-manage",
+        component: () =>
+          import(/* webpackChunkName: "layout" */ "./views/admin/user")
+      },
+      {
+        path: "/admin/role",
+        name: "role-manage",
+        component: () =>
+          import(/* webpackChunkName: "layout" */ "./views/admin/role")
+      },
+      {
+        path: "/admin/system",
+        name: "system-manage",
+        component: () =>
+          import(/* webpackChunkName: "layout" */ "./views/admin/system")
+      }
+    ]
   },
   {
     path: "*",

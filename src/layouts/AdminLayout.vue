@@ -9,7 +9,7 @@
       >
         <div class="logo">
           <img src="~@/assets/spring.svg" class="svg-logo" alt="logo" />
-          <h1>Ant design Pro</h1>
+          <h1>My-blog Admin</h1>
         </div>
         <SiderMenu />
       </a-layout-sider>

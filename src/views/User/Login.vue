@@ -80,7 +80,17 @@ export default {
     this.form = this.$form.createForm(this);
     return {};
   },
+  mounted() {
+    //绑定事件
+    window.addEventListener("keydown", this.keyDown);
+  },
   methods: {
+    keyDown(e) {
+      //如果是回车则执行登录方法
+      if (e.keyCode == 13) {
+        this.handleSubmit();
+      }
+    },
     handleSubmit() {
       this.form.validateFields((err, values) => {
         if (!err) {
@@ -107,6 +117,9 @@ export default {
         }
       });
     }
+  },
+  destroyed() {
+    window.removeEventListener("keydown", this.keyDown, false);
   }
 };
 </script>

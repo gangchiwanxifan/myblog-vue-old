@@ -23,7 +23,7 @@
             <a href="_self">条款</a>
           </div>
           <div class="copyright">
-            Copyright &copy; 2018 vueComponent
+            Myblog Ant Design ©2021 Created by gcwxf
           </div>
         </div>
       </div>

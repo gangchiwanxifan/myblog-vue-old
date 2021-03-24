@@ -7,7 +7,11 @@
       <a-dropdown placement="bottomRight" class="right-dropdown">
         <span class="ant-pro-account-avatar">
           <a-divider type="vertical"></a-divider>
-          <a-avatar :src="avatar" class="antd-pro-global-header-index-avatar" />
+          <a-avatar
+            :src="avatar"
+            :loadError="loadError"
+            class="antd-pro-global-header-index-avatar"
+          />
           <a-icon type="down" style="padding: 0px 3px" />
           <!-- <span style="font-size:15px"> {{ username }}</span> -->
         </span>
@@ -84,9 +88,7 @@ export default {
   mounted() {
     if (this.loginStatus) {
       this.accountName = this.userInfo.accountName;
-      this.avatar = this.userInfo.avatar
-        ? this.userInfo.avatar
-        : "https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png";
+      this.avatar = this.userInfo.avatar ? this.userInfo.avatar : "/avatar.png";
     }
   },
   computed: {
@@ -104,6 +106,9 @@ export default {
     }
   },
   methods: {
+    loadError() {
+      this.avatar = "/avatar.png";
+    },
     handleToEdit() {
       this.$router.push({ path: "/blog/edit" });
     },

@@ -4,7 +4,10 @@
       <div class="ant-top-nav-header">
         <div class="ant-top-nav-header-main">
           <div class="ant-top-nav-header-left">
-            <div class="ant-top-nav-header-logo">
+            <div
+              class="ant-top-nav-header-logo"
+              @click="() => $router.push({ path: '/' })"
+            >
               <img src="~@/assets/spring.svg" class="logo" alt="logo" />
               <h1>Simple Blog</h1>
             </div>
